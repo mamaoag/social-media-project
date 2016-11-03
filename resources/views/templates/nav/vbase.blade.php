@@ -12,7 +12,7 @@
     Latest
     <div class="ui label">1</div>
   </a>
-  @if(Auth::user()->usergroup == 3)
+  @if(Auth::user()->usergroup >= 3)
   <a href="{{route('admin.index')}}" class="item">
     Goto Admin Panel
     <i class="dashboard icon"></i>

@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('index');
+Route::get('/', 'HomeController@index')->name('index');
 
   /* register and login  */
   Route::group(['middleware' => 'guest'], function(){
@@ -45,9 +43,9 @@ Route::get('/', function () {
   /* Settings and stuff */
   Route::get('{id}/settings', 'User\SettingsController@getAccountSettings')->name('account.settings');
   Route::get('{id}/settings/privacy', 'User\SettingsController@getPrivacySettings')->name('account.privacy');
-  Route::get('{id}/settings/change/password', 'User\SettingsController@changePass')->name('account.changepass');
-  Route::post('{id}/settings', 'User\SettingsController@updateAccountSettings')->name('account.settings.update');
-  Route::post('{id}/settings/privacy', 'User\SettingsController@updateAccountSettings')->name('account.privacy.update');
-  Route::post('{id}/settings/change/password', 'User\SettingsController@updateChangePass')->name('account.changepass.update');
+  Route::get('{id}/settings/change/password', 'User\SettingsController@getChangePass')->name('account.changepass');
+  Route::put('{id}/settings', 'User\SettingsController@updateAccountSettings')->name('account.settings.update');
+  Route::put('{id}/settings/privacy', 'User\SettingsController@updateAccountSettings')->name('account.privacy.update');
+  Route::put('{id}/settings/change/password', 'User\SettingsController@updateChangePass')->name('account.changepass.update');
   Route::get('{id}/settings/deactivate', 'User\SettingsController@getDeactivateAccount')->name('account.deactivate');
-  Route::post('{id}/settings', 'User\SettingsController@deactivateAccount')->name('account.dead');
+  Route::put('{id}/settings/deactivate', 'User\SettingsController@deactivateAccount')->name('account.dead');

@@ -20,7 +20,7 @@ class UserController extends Controller
 
   /* Home */
   public function index()
-  {
+  {    
     $data = Posts::where(function($query){
       return $query->where('user_id',Auth::user()->id)->orWhere('category','announcement')->orWhereIn('user_id',Auth::user()->subscribeRequestsPending()->pluck('id'));
     })

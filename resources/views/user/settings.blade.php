@@ -17,13 +17,13 @@ Settings - Tragala
     <br>
     <br>
     <div class="ui secondary vertical pointing menu">
-      <a class="active teal item">
+      <a href="{{route('account.settings',Auth::user()->username)}}" class="active teal item">
         Account Settings
       </a>
-      <a class="item">
+      <a href="{{route('account.privacy',Auth::user()->username)}}" class="item">
         Privacy Settings
       </a>
-      <a class="item">
+      <a href="{{route('account.changepass',Auth::user()->username)}}" class="item">
         Change Password
       </a>
     </div>

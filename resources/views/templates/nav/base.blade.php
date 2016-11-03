@@ -25,8 +25,8 @@
       </div>
     </div>
   @else
-  <a href="" class="item">Sign Up</a>
-  <div class="item"><a href="" class="item ui button teal">Login</a></div>
+  <a href="{{route('auth.signup')}}" class="item">Sign Up</a>
+  <div class="item"><a href="{{route('auth.login')}}" class="item ui button teal">Login</a></div>
   @endif
   </div>
 </div>

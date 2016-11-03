@@ -7,6 +7,8 @@ use Auth;
 use Tragala\User;
 use Tragala\Mail\Confirm;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
+
 class AuthController extends Controller
 {
   /*
@@ -66,7 +68,7 @@ class AuthController extends Controller
       'username' => $request->uname,
       'email' => $request->email,
       'gender' => $request->gender,
-      'password' => bcrypt($request->password),
+      'password' => Hash::make($request->password),
       'hash' => $code,
     ]);
 

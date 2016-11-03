@@ -10,6 +10,7 @@ use Tragala\Comments;
 use Illuminate\Http\Request;
 use Tragala\Http\Controllers\Controller;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Hash;
 
 class SettingsController extends Controller
 {
@@ -62,7 +63,7 @@ class SettingsController extends Controller
 
     Auth::user()->update(['username' => $request->uname, 'email' => $request->email]);
 
-    return view('user.settings',['user' => $data]);
+    return redirect()->route('account.settings',Auth::user()->username)->withTitle('Account Updated')->withInfo('You have updated your credentials');
   }
 
   /* Privacy Settings */
@@ -84,7 +85,16 @@ class SettingsController extends Controller
     }
 
     $data = User::where('username',$id)->firstOrFail();
-    return view('user.changepass',['user' => $data]);
+
+    $this->validate($request,['old_pass' => 'required|min:6','password' => 'required|min:6|confirmed']);
+
+    if(!Hash::check($request->old_pass,Auth::user()->password))
+    {
+      return redirect()->route('account.settings',Auth::user()->username)->withTitle('Account Update Failed')->withInfo('Check your credentials again');
+    }
+
+    Auth::user()->update(['password'=> Hash::make($request->password)]);
+    return redirect()->route('account.settings',Auth::user()->username)->withTitle('Account Updated')->withInfo('You have updated your password');
   }
 
   /* Deactivate Account */
