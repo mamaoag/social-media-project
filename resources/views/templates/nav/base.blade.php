@@ -19,7 +19,7 @@
       <div class="menu">
         <a href="{{route('user.see',Auth::user()->username)}}" class="item">View Profile</a>
         <a href="{{route('user.edit',Auth::user()->username)}}" class="item">Edit Profile</a>
-        <a href="" class="item">Settings</a>
+        <a href="{{route('account.settings',Auth::user()->username)}}" class="item">Settings</a>
         <div class="divider"></div>
         <a href="{{ route('auth.logout') }}" class="item">Logout</a>
       </div>
