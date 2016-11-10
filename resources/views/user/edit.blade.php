@@ -6,7 +6,7 @@ Edit {{Auth::user()->first_name}} {{Auth::user()->last_name}}'s Profile - Tragal
 
 @section('content')
 <div class="ui two column stackable grid ">
-  <div class="column">
+  <div class="seven wide column">
     <br>
     <br>
     <br>
@@ -67,8 +67,7 @@ Edit {{Auth::user()->first_name}} {{Auth::user()->last_name}}'s Profile - Tragal
       </form>
     </div>
   </div>
-  <div class="ui vertical divider">OR</div>
-  <div class="column">
+  <div class="wide column">
     <div class="row">
       <br>
       <div class="ui dividing header">Avatar</div>
@@ -86,7 +85,7 @@ Edit {{Auth::user()->first_name}} {{Auth::user()->last_name}}'s Profile - Tragal
         </form>
       </div>
     </div>
-    <div class="ui horizontal divider">OR</div>
+    <div class="column ui horizontal divider">OR</div>
     <div class="row">
       <div class="ui dividing header">Banner</div>
       <div class="ui stackable segment">

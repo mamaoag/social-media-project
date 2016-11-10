@@ -69,6 +69,10 @@ class PostsController extends Controller
   {
     $post = Posts::findOrFail($id);
 
+    if(Auth::user()->hasLiked($post) || Auth::user()->hasDisliked($post)){
+      $post->dislikes()->where('user_id',Auth::user()->id)->delete();
+    }
+
     if(Auth::user()->hasLiked($post)){
       $post->likes()->where('user_id',Auth::user()->id)->delete();
       return redirect()->back();
@@ -77,13 +81,17 @@ class PostsController extends Controller
     $like = $post->likes()->create(['user_id' => Auth::user()->id]);
     Auth::user()->likes()->save($like);
 
-    return redirect()->route('user.seepost',$id);
+    return redirect()->back();//route('user.seepost',$id);
   }
 
   /* Dislike Post */
   public function dislike($id)
   {
     $post = Posts::findOrFail($id);
+
+    if(Auth::user()->hasLiked($post) || Auth::user()->hasDisliked($post)){
+      $post->likes()->where('user_id',Auth::user()->id)->delete();
+    }
 
     if(Auth::user()->hasDisliked($post)){
       $post->dislikes()->where('user_id',Auth::user()->id)->delete();
@@ -93,6 +101,6 @@ class PostsController extends Controller
     $dislike = $post->dislikes()->create(['user_id' => Auth::user()->id]);
     Auth::user()->dislikes()->save($dislike);
 
-    return redirect()->route('user.seepost',$id);
+    return redirect()->back();//route('user.seepost',$id);
   }
 }

@@ -38,29 +38,10 @@ Settings - Tragala
     <br>
     <br>
       <div class="ui fluid stackable segment">
-        <div class="ui dividing header">Change your password</div>
+        <div class="ui dividing header">Privacy</div>
         <form action="{{route('account.changepass.update',Auth::user()->username)}}" class="ui form large" method="post">
           {{method_field('PUT')}}
           {{csrf_field()}}
-          <div class="required field{{ $errors->has('password')? ' error' : '' }}">
-            <div class="ui left icon input">
-              @if($errors->has('old_pass') )
-              <div class="floating ui red left pointing label">{{ $errors->first('old_pass') }}</div>
-              @endif
-              <i class="lock icon"></i>
-              <input type="password" name="old_pass" id="" placeholder="Old Password" value="{{old('old_pass')}}">
-            </div>
-          </div>
-          <div class="ui horizontal divider">AND</div>
-          <div class="required field{{ $errors->has('password')? ' error' : '' }}">
-            <div class="ui left icon input">
-              @if($errors->has('password') )
-              <div class="floating ui red left pointing label">{{ $errors->first('password') }}</div>
-              @endif
-              <i class="lock icon"></i>
-              <input type="password" name="password" id="" placeholder="Password" value="{{old('password')}}">
-            </div>
-          </div>
           <div class="required field{{ $errors->has('password_confirmation')? ' error' : '' }}">
             <div class="ui left icon input">
               @if($errors->has('password_confirmation') )            <div class="floating ui red left pointing label">{{ $errors->first('password_confirmation') }}</div>

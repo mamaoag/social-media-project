@@ -56,14 +56,22 @@ active teal
         <div class="extra content">
           <div class="left floated author">
             <a href="{{route('user.like',$post->id)}}"><i class="thumbs up outline icon"></i>
-              @if($post->likes->count() < 1)
+              @if(Auth::user()->hasLiked($post) && $post->likes->count() > 1)
+              You and {{$post->likes->count() - 1}} {{str_plural('other',$post->likes->count())}}have liked this
+              @elseif(Auth::user()->hasLiked($post))
+              You have liked this
+              @elseif($post->likes->count() < 1)
               Like
               @else
               {{$post->likes->count()}} {{str_plural('Like',$post->likes->count())}}
               @endif
               &nbsp;</a>
             <a href="{{route('user.dislike',$post->id)}}"><i class="thumbs down outline icon"></i>
-              @if($post->dislikes->count() < 1)
+              @if(Auth::user()->hasDisliked($post) && $post->dislikes->count() > 1)
+              You and {{$post->dislikes->count() - 1}} {{str_plural('other',$post->dislikes->count())}}have disliked this
+              @elseif(Auth::user()->hasDisliked($post))
+              You have disliked this
+              @elseif($post->dislikes->count() < 1)
               Dislike
               @else
               {{$post->dislikes->count()}} {{str_plural('Dislike',$post->dislikes->count())}}
@@ -119,7 +127,7 @@ active teal
             <option value="food">Food</option>
             <option value="travel">Travel</option>
             <option value="experience">Experience</option>
-            @if(Auth::user()->usergroup == 3)
+            @if(Auth::user()->usergroup >= 3)
             <option value="announcement">Announcement</option>
             @endif
           </select>
