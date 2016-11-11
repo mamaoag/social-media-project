@@ -49,3 +49,4 @@ Route::get('/', 'HomeController@index')->name('index');
   Route::put('{id}/settings/change/password', 'User\SettingsController@updateChangePass')->name('account.changepass.update');
   Route::get('{id}/settings/deactivate', 'User\SettingsController@getDeactivateAccount')->name('account.deactivate');
   Route::put('{id}/settings/deactivate', 'User\SettingsController@deactivateAccount')->name('account.dead');
+  Route::get('api/users', 'JSON\UserController@data');

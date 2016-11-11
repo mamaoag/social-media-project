@@ -20,7 +20,7 @@ class UserController extends Controller
 
   /* Home */
   public function index()
-  {    
+  {
     $data = Posts::where(function($query){
       return $query->where('user_id',Auth::user()->id)->orWhere('category','announcement')->orWhereIn('user_id',Auth::user()->subscribeRequestsPending()->pluck('id'));
     })
@@ -87,8 +87,8 @@ class UserController extends Controller
 
     $image->move('images/users/',$image->getClientOriginalName());
     $filename = 'images/users/'.$image->getClientOriginalName();
-    $changed = 'images/users/'.Auth::user()->username.$image->getClientOriginalExtension();
-    $nameonly = Auth::user()->username.$image->getClientOriginalExtension();
+    $changed = 'images/users/'.Auth::user()->username.'.'.$image->getClientOriginalExtension();
+    $nameonly = Auth::user()->username.'.'.$image->getClientOriginalExtension();
 
     Image::make($filename)->save($changed);
     User::where('username',$id)->update(['avatar'=>$nameonly]);
@@ -119,12 +119,11 @@ class UserController extends Controller
   public function subscribeTo($id)
   {
     $user = User::where('username',$id)->firstOrFail();
-
     if(Auth::user()->hasSubscribeRequestsPending($user) || $user->hasSubscribeRequestsPending(Auth::user()))
     {
 
     }
-    Auth::user()->subcribeUser($id);
+    Auth::user()->subcribeUser($user);
 
     return redirect()->back();
   }
