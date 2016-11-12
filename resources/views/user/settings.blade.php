@@ -26,6 +26,11 @@ Settings - Tragala
       <a href="{{route('account.changepass',Auth::user()->username)}}" class="item">
         Change Password
       </a>
+      @if(Auth::user()->usergroup > 2)
+      <a href="{{route('account.changepass',Auth::user()->username)}}" class="item">
+        Back to Login
+      </a>
+      @endif
     </div>
   </div>
   <div class="wide column">

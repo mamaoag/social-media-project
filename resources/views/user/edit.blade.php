@@ -67,6 +67,7 @@ Edit {{Auth::user()->first_name}} {{Auth::user()->last_name}}'s Profile - Tragal
       </form>
     </div>
   </div>
+  <div class="ui vertical divider">OR</div>
   <div class="wide column">
     <div class="row">
       <br>

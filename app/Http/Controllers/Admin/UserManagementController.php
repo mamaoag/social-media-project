@@ -81,17 +81,19 @@ class UserManagementController extends Controller
      public function changeStatus($id)
      {
        $data = User::findOrFail($id);
-       if (Auth::user()->activated == 1){
 
-       }
-       else{
          if($data->activated == 1){
            $data->update('activated', 0);
+           return redirect()->back()->withTitle('Account Deactivated')->withInfo('You have successfully deactivated that account');
+           if ($data->username == Auth::user()->username && Auth::user()->activated == 1){
+             return redirect()->back()->withTitle('You cant your status')->withInfo('You cannot change your status while logged in');
+           }
          }
          else{
            $data->update('activated',1);
+           return redirect()->back()->withTitle('Account Reactivated')->withInfo('You have successfull reactivated the account');
          }
-       }
+
      }
 
 }

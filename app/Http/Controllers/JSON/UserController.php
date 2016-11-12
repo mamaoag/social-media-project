@@ -2,7 +2,7 @@
 
 namespace Tragala\Http\Controllers\JSON;
 
-use Tragala\User
+use Tragala\User;
 use Illuminate\Http\Request;
 use Tragala\Http\Controllers\Controller;
 

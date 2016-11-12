@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('index');
+  Route::get('/', 'HomeController@index')->name('index')->middleware('guest');
 
   /* register and login  */
   Route::group(['middleware' => 'guest'], function(){
@@ -23,9 +23,10 @@ Route::get('/', 'HomeController@index')->name('index');
   Route::get('/verify/{id}', 'AuthController@verifyAccount')->name('user.confirm');
   Route::get('logout', 'AuthController@logout')->name('auth.logout');
   /* admin */
-  Route::get('admin/home', 'Admin\AdminController@index')->name('admin.index');
+  Route::get('admin/dashboard', 'Admin\AdminController@index')->name('admin.index');
   /* admin/user */
   Route::resource('admin/user', 'Admin\UserManagementController',['as'=>'admin']);
+  Route::get('admin/user/deactivate/{$id}','Admin\UserManagementController@changeStatus')->name('admin.user.deactivate');
   /*  member */
   Route::get('home', 'User\UserController@index')->name('user.index'); //News Feed
   Route::get('/{id}','User\UserController@see')->name('user.see');
@@ -49,4 +50,5 @@ Route::get('/', 'HomeController@index')->name('index');
   Route::put('{id}/settings/change/password', 'User\SettingsController@updateChangePass')->name('account.changepass.update');
   Route::get('{id}/settings/deactivate', 'User\SettingsController@getDeactivateAccount')->name('account.deactivate');
   Route::put('{id}/settings/deactivate', 'User\SettingsController@deactivateAccount')->name('account.dead');
+  /* JSON */
   Route::get('api/users', 'JSON\UserController@data');
