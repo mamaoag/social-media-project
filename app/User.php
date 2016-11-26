@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'email', 'password', 'last_name', 'username', 'location', 'hash', 'verified', 'activate','gender','banner','avatar'
+        'first_name', 'email', 'password', 'last_name', 'username', 'location', 'hash', 'verified', 'activate','gender','banner','avatar','banned_at', 'banned'
     ];
 
     /**
@@ -53,14 +53,14 @@ class User extends Authenticatable
       return $this->subscribedTo()->wherePivot('accepted',false)->get();
     }
 
-    public function hasSubscribeRequestsPending(User $user)
+    public function hasSubscribeRequestsPending($id)
     {
-      return (bool) $this->subscribeRequestsPending()->where('id',$user->id)->count();
+      return (bool) $this->subscribeRequestsPending()->where('friend_id',$id)->count();
     }
 
     public function hasSubscribeRequest(User $user)
     {
-      return (bool) $this->subscribeRequests()->where('id',$user->id)->count();
+      return (bool) $this->subscribeRequests()->where('friend_id',$user->id)->count();
     }
 
     public function subscribeUser(User $user)

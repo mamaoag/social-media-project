@@ -26,6 +26,11 @@ Settings - Tragala
       <a href="{{route('account.changepass',Auth::user()->username)}}"class="active teal item">
         Change Password
       </a>
+      @if(Auth::user()->usergroup > 2)
+      <a href="{{route('admin.index')}}" class="item">
+        Back to Admin Panel
+      </a>
+      @endif
     </div>
   </div>
   <div class="wide column">

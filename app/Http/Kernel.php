@@ -53,5 +53,6 @@ class Kernel extends HttpKernel
         'guest' => \Tragala\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'admin' => \Tragala\Http\Middleware\Admin::class,
+        'ban' => \Tragala\Http\Middleware\BannedUser::class,
     ];
 }

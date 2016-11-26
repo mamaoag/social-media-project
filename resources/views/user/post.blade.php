@@ -46,7 +46,7 @@
         <div class="left floated author">
           <a href="{{route('user.like',$post->id)}}"><i class="thumbs up outline icon"></i>
             @if(Auth::user()->hasLiked($post) && $post->likes->count() > 1)
-            You and {{$post->likes->count() - 1}} {{str_plural('other',$post->likes->count())}}have liked this
+            You and {{$post->likes->count() - 1}} {{str_plural('other',$post->likes->count())}} have liked this
             @elseif(Auth::user()->hasLiked($post))
             You have liked this
             @elseif($post->likes->count() < 1)
@@ -57,7 +57,7 @@
             &nbsp;</a>
           <a href="{{route('user.dislike',$post->id)}}"><i class="thumbs down outline icon"></i>
             @if(Auth::user()->hasDisliked($post) && $post->dislikes->count() > 1)
-            You and {{$post->dislikes->count() - 1}} {{str_plural('other',$post->dislikes->count())}}have disliked this
+            You and {{$post->dislikes->count() - 1}} {{str_plural('other',$post->dislikes->count())}} have disliked this
             @elseif(Auth::user()->hasDisliked($post))
             You have disliked this
             @elseif($post->dislikes->count() < 1)
@@ -75,7 +75,9 @@
           </a>
         </div>
       <div class="right floated author">
-        <img class="ui avatar image" src="{{asset('images/users/')}}/{{$post->user->avatar}}"> {{$post->user->username}}
+        <a href="{{route('user.see',$post->user->username)}}">
+          <img class="ui avatar image" src="{{asset('images/users/')}}/{{$post->user->avatar}}"> {{$post->user->username}}
+        </a>
       </div>
     </div>
   </div>
@@ -116,10 +118,13 @@
         <div class="text">
           {{$comment->comment}}
         </div>
+        <div class="action">
+          <a href=""><i class="reply icon"></i>Reply</a>
+        </div>
       </div>
     </div>
+    <br><hr style="border: 0">
     @endforeach
-    <br>
     {{$reply->links('vendor.pagination.default')}}
     @endif
   </div>

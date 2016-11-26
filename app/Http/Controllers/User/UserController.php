@@ -6,6 +6,7 @@ use Auth;
 use Tragala\User;
 use Tragala\Posts;
 use Tragala\Likes;
+use Tragala\Friend;
 use Tragala\Comments;
 use Illuminate\Http\Request;
 use Tragala\Http\Controllers\Controller;
@@ -15,7 +16,7 @@ class UserController extends Controller
 {
   public function __construct()
   {
-    $this->middleware('auth');
+    $this->middleware(['ban','auth']);
   }
 
   /* Home */
@@ -119,12 +120,12 @@ class UserController extends Controller
   public function subscribeTo($id)
   {
     $user = User::where('username',$id)->firstOrFail();
+
     if(Auth::user()->hasSubscribeRequestsPending($user) || $user->hasSubscribeRequestsPending(Auth::user()))
     {
 
     }
-    Auth::user()->subcribeUser($user);
-
+    Friend::create(['user_id' => $user->id,'friend_id' => Auth::user()->id]);
     return redirect()->back();
   }
 

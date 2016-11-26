@@ -26,7 +26,7 @@
   Route::get('admin/dashboard', 'Admin\AdminController@index')->name('admin.index');
   /* admin/user */
   Route::resource('admin/user', 'Admin\UserManagementController',['as'=>'admin']);
-  Route::get('admin/user/deactivate/{$id}','Admin\UserManagementController@changeStatus')->name('admin.user.deactivate');
+  Route::get('admin/user/ban/{id}','Admin\UserManagementController@banUser')->name('admin.user.ban');
   /*  member */
   Route::get('home', 'User\UserController@index')->name('user.index'); //News Feed
   Route::get('/{id}','User\UserController@see')->name('user.see');
@@ -52,3 +52,4 @@
   Route::put('{id}/settings/deactivate', 'User\SettingsController@deactivateAccount')->name('account.dead');
   /* JSON */
   Route::get('api/users', 'JSON\UserController@data');
+  Route::post('api/login', 'JSON\UserController@login');

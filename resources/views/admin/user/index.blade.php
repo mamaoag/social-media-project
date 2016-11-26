@@ -38,7 +38,11 @@ User Management - Administrator
     <div class="extra content">
       <div class="ui two buttons">
         <a href="{{route('admin.user.edit',$user->id)}}" class="ui basic green button">Edit Profile</a>
-        <a href="{{route('admin.user.deactivate',$user->id)}}" class="ui basic red button">Ban User</a>
+        @if($user->banned == false)
+        <a href="{{route('admin.user.ban',$user->id)}}" class="ui basic red button">Ban User</a>
+        @elseif ($user->banned == true)
+        <a href="{{route('admin.user.ban',$user->id)}}" class="ui basic blue button">Lift Ban</a>
+        @endif
       </div>
     </div>
   </div>

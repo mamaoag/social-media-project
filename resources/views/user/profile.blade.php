@@ -12,7 +12,7 @@
 
 @section('profile')
 <h2 class="ui header">
-  <img src="{{asset('images/users')}}/{{$user->avatar}}" alt="" class="ui circular image">
+  <img src="{{asset('images/users')}}/{{$user->avatar}}" alt="" class="ui circular avatar image">
   <div class="content">
     {{$user->first_name}} {{$user->last_name}} @if($user->usergroup > 1) <i class="check circle blue icon"></i> @endif
       <div class="ui sub header">@ {{$user->username}}</div>
@@ -21,7 +21,7 @@
 <br>
 @if($user->id == Auth::user()->id)
 <a href="{{route('user.edit',Auth::user()->username)}}" class="right ui teal button">Edit Profile</a>
-@elseif($user->id = Auth::user()->hasSubscribeRequestsPending($user))
+@elseif(Auth::user()->hasSubscribeRequestsPending($user->id) == false)
 <a class="right ui teal button">Following User</a>
 @else
 <a href="{{route('user.sub',$user->username)}}" class="right ui teal button">Follow</a>

@@ -23,14 +23,14 @@ class AuthController extends Controller
   {
     $this->validate($request,[
       'user' => 'required|min:3',
-      'pass' => 'required|min:6'
+      'pass' => 'required|min:4'
     ]);
 
     if(!Auth::attempt(['username' => $request->user, 'password' => $request->pass])){
       return redirect()->route('auth.login')->withTitle('Login Failed')->withInfo('Check your credentails or maybe register that account');
     }
     $test = User::where('username', $request->user)->first();
-    if($test->verified < 1){
+    if($test->verified == false){
       Auth::logout();
       return redirect()->route('auth.login')->withTitle('Login Failed')->withInfo('Verify your email first');
     }
@@ -58,7 +58,7 @@ class AuthController extends Controller
       'uname' => 'required|min:2|unique:users,username',
       'email' => 'required|email|min:2|unique:users,email',
       'gender' => 'required',
-      'password' => 'required|min:2|confirmed',
+      'password' => 'required|min:4|confirmed',
     ]);
 
     $code = str_random(10);
@@ -87,7 +87,7 @@ class AuthController extends Controller
     $data = User::where('hash',$id)->first();
 
     if($data){
-      $data->update(['activated'=>true,'verified'=>true,]);
+      $data->update(['activated'=>true,'verified'=>true,])->save();
       return redirect()->route('auth.login')->withTitle('Account Authenticated')->withInfo('Login now');
     }else{
       abort(404);

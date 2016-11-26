@@ -21,7 +21,8 @@ class PostsController extends Controller
     $this->validate($request,[
         'title' => 'required',
         'description' => 'required',
-        'photo' => 'required|image'
+        'photo' => 'required|image',
+        'category' => 'required',
     ]);
 
     Posts::create([

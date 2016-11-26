@@ -27,8 +27,8 @@ Settings - Tragala
         Change Password
       </a>
       @if(Auth::user()->usergroup > 2)
-      <a href="{{route('account.changepass',Auth::user()->username)}}" class="item">
-        Back to Login
+      <a href="{{route('admin.index')}}" class="item">
+        Back to Admin Panel
       </a>
       @endif
     </div>
@@ -72,7 +72,7 @@ Settings - Tragala
       </div>
       <div class="ui horizontal divider">OR</div>
       <div class="ui stackable segment">
-          <a href="http://" class="ui red large fluid button">Deactivate Your Account</a>
+          <a href="" class="ui red large fluid button">Deactivate Your Account</a>
       </div>
     </div>
   </div>

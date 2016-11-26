@@ -28,6 +28,8 @@ class CreateUsersTable extends Migration
             $table->boolean('verified')->default(0);
             $table->boolean('activated')->default(0);
             $table->integer('usergroup')->default(1);
+            $table->boolean('banned')->default(0);
+            $table->timestamp('banned_at');
             $table->rememberToken();
             $table->timestamps();
         });

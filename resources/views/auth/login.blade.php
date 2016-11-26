@@ -19,7 +19,7 @@ body>.grid{
 @section('content')
 <br>
 <br>
-<br>    
+<br>
 <div class="ui middle aligned center aligned grid">
   <div class="column">
     <h2 class="ui teal image header">
@@ -30,13 +30,13 @@ body>.grid{
     <form class="ui large form" method="post" action="{{ route('auth.check') }}">
       {{csrf_field()}}
       <div class="ui stacked segment">
-        <div class="field">
+        <div class="field{{$errors->has('user')? ' error': ''}}">
           <div class="ui left icon input">
             <i class="at icon"></i>
             <input type="text" name="user" placeholder="Username">
           </div>
         </div>
-        <div class="field">
+        <div class="field{{$errors->has('pass')? ' error' : ''}}">
           <div class="ui left icon input">
             <i class="lock icon"></i>
             <input type="password" name="pass" placeholder="Password">

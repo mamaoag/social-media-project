@@ -6,6 +6,8 @@ use Auth;
 use Tragala\User;
 use Illuminate\Http\Request;
 use Tragala\Http\Controllers\Controller;
+use Carbon\Carbon;
+
 class UserManagementController extends Controller
 {
     /**
@@ -78,20 +80,22 @@ class UserManagementController extends Controller
       * @param  int  $id
       * @return \Illuminate\Http\Response
       */
-     public function changeStatus($id)
+     public function banUser($id)
      {
        $data = User::findOrFail($id);
 
-         if($data->activated == 1){
-           $data->update('activated', 0);
-           return redirect()->back()->withTitle('Account Deactivated')->withInfo('You have successfully deactivated that account');
-           if ($data->username == Auth::user()->username && Auth::user()->activated == 1){
+         if($data->banned == false){
+           if ($data->username == Auth::user()->username && Auth::user()->banned == true){
              return redirect()->back()->withTitle('You cant your status')->withInfo('You cannot change your status while logged in');
            }
+           $data->banned = true;
+           $data->save();
+           return redirect()->back()->withTitle('Account Banned')->withInfo('You have successfully banned the user');
          }
          else{
-           $data->update('activated',1);
-           return redirect()->back()->withTitle('Account Reactivated')->withInfo('You have successfull reactivated the account');
+           $data->banned = false;
+           $data->save();
+           return redirect()->back()->withTitle('Account Lifted')->withInfo('You have successfull lifted the ban');
          }
 
      }

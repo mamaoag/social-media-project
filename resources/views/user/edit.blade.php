@@ -53,7 +53,7 @@ Edit {{Auth::user()->first_name}} {{Auth::user()->last_name}}'s Profile - Tragal
               <div class="floating ui red left pointing label">{{ $errors->first('location') }}</div>
               @endif
               <i class="map icon"></i>
-              <input type="text" name="lname" placeholder="Location" value="{{Auth::user()->location ?:old('location')}}">
+              <input type="text" name="location" placeholder="Location" value="{{Auth::user()->location ?:old('location')}}">
             </div>
           </div>
           <div class="inline required fields">
@@ -67,7 +67,6 @@ Edit {{Auth::user()->first_name}} {{Auth::user()->last_name}}'s Profile - Tragal
       </form>
     </div>
   </div>
-  <div class="ui vertical divider">OR</div>
   <div class="wide column">
     <div class="row">
       <br>

@@ -56,12 +56,12 @@ class SettingsController extends Controller
 
     $data = User::where('username',$id)->firstOrFail();
 
-    $this->validate([
-      'uname' => 'min:3|unique: users,username',
-      'email' => 'email|unique: users,email',
+    $this->validate($request,[
+      'uname' => 'min:3|unique:users,username',
+      'email' => 'email',
     ]);
 
-    Auth::user()->update(['username' => $request->uname, 'email' => $request->email]);
+    Auth::user()->fill(['username' => $request->uname, 'email' => $request->email])->save();
 
     return redirect()->route('account.settings',Auth::user()->username)->withTitle('Account Updated')->withInfo('You have updated your credentials');
   }
@@ -78,7 +78,7 @@ class SettingsController extends Controller
   }
 
   /* Change Pass Settings */
-  public function updateChangePass($id)
+  public function updateChangePass(Request $request,$id)
   {
     if(!$id == Auth::user()->id){
       abort(404);
